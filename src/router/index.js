@@ -13,20 +13,18 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: Login
+      name: 'firstIndex',
+      component: Index,
     },
     {
       path: '/index',
       name: 'Index',
       component: Index,
-      meta: {requireAuth: true}
     },
     {
       path: '/Album',
       name: 'Album',
       component: Album,
-      meta: {requireAuth: true}
     },
     {
       path: '/login',

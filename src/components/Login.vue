@@ -55,7 +55,7 @@
                         loginService.login(this.formInline.user, this.formInline.password, res => {
                             this.$Message.success('Success!');
                             localStorage.setItem(process.env.TOKEN_NAME, res.data.body);
-                            this.$router.push("/index");
+                            this.$router.push("/");
                         });
                     } else {
                         this.$Message.error('Fail!');

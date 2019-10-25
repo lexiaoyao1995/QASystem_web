@@ -11,16 +11,23 @@
 <template>
   <Menu mode="horizontal" theme="light" active-name="1">
     <MenuItem name="1">
-      <Icon type="ios-paper"/>
-      <router-link to="index">首页</router-link>
+      <router-link to="index">
+
+        <Icon type="ios-paper"/>
+        首页
+      </router-link>
     </MenuItem>
     <MenuItem name="2">
-      <Icon type="ios-paper"/>
-      <router-link to="Album">相册</router-link>
+      <router-link to="Album">
+        <Icon type="ios-paper"/>
+        相册
+      </router-link>
     </MenuItem>
     <MenuItem name="3">
-      <Icon type="ios-paper"/>
-      <router-link to="articles">文章</router-link>
+      <router-link to="articles">
+        <Icon type="ios-paper"/>
+        文章
+      </router-link>
     </MenuItem>
   </Menu>
 </template>

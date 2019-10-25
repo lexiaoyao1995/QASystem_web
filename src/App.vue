@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Nav></Nav>
+    <Nav v-show="$route.name!=='Login'"></Nav>
     <router-view/>
   </div>
 </template>
