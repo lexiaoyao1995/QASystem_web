@@ -6,6 +6,8 @@ import router from './router'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import Axios from "axios";
+import ToolService from "./service/ToolService";
+import photoService from "./service/photoService";
 //
 
 Axios.interceptors.request.use(
@@ -53,8 +55,12 @@ Axios.interceptors.response.use(
 //
 Vue.use(ViewUI);
 
-Vue.config.productionTip = false
-Vue.prototype.$axios = Axios
+Vue.config.productionTip = false;
+Vue.prototype.$axios = Axios;
+Vue.prototype.$tool = ToolService;
+
+Vue.prototype.photoService = photoService;
+
 
 
 /* eslint-disable no-new */

@@ -4,6 +4,7 @@ import Album from "@/components/Album";
 import Index from "../components/Index";
 import Login from "../components/Login";
 import Articles from "../components/Articles";
+import PhotoList from "../components/PhotoList";
 
 Vue.use(Router)
 
@@ -35,7 +36,11 @@ const router = new Router({
       path: '/articles',
       name: 'Articles',
       component: Articles
-
+    },
+    {
+      path: '/photoList/:id',
+      name: 'photoList',
+      component: PhotoList
     }
   ]
 });

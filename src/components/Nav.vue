@@ -9,22 +9,21 @@
 
 
 <template>
-  <Menu mode="horizontal" theme="light" active-name="1">
+  <Menu mode="horizontal" theme="light">
     <MenuItem name="1">
-      <router-link to="index">
-
+      <router-link to="/index">
         <Icon type="ios-paper"/>
         首页
       </router-link>
     </MenuItem>
     <MenuItem name="2">
-      <router-link to="Album">
+      <router-link to="/Album">
         <Icon type="ios-paper"/>
         相册
       </router-link>
     </MenuItem>
     <MenuItem name="3">
-      <router-link to="articles">
+      <router-link to="/articles">
         <Icon type="ios-paper"/>
         文章
       </router-link>
