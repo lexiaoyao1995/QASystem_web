@@ -13,7 +13,6 @@ import photoService from "./service/photoService";
 Axios.interceptors.request.use(
   config => {
     if (localStorage.getItem(process.env.TOKEN_NAME)) {
-      console.log(localStorage.getItem(process.env.TOKEN_NAME));
       config.headers[process.env.TOKEN_NAME] = localStorage.getItem(process.env.TOKEN_NAME);
     }
     return config;
@@ -60,7 +59,6 @@ Vue.prototype.$axios = Axios;
 Vue.prototype.$tool = ToolService;
 
 Vue.prototype.photoService = photoService;
-
 
 
 /* eslint-disable no-new */

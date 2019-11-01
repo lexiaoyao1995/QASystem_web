@@ -43,8 +43,6 @@
         mounted() {
             this.topicId = this.$route.params.id;
             this.topicName = this.$route.params.name;
-            console.log("name " + this.$route.params.name);
-            console.log(this.topicId);
             this.initArticle();
         },
         methods: {
