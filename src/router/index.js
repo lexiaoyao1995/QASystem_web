@@ -5,6 +5,7 @@ import Index from "../components/Index";
 import Login from "../components/Login";
 import Articles from "../components/Articles";
 import PhotoList from "../components/PhotoList";
+import Article from "../components/Article";
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ const router = new Router({
       path: '/photoList/:id',
       name: 'photoList',
       component: PhotoList
+    },
+    {
+      path: '/article/:id',
+      name: 'Article',
+      component: Article
     }
   ]
 });

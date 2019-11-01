@@ -55,6 +55,8 @@
                         loginService.login(this.formInline.user, this.formInline.password, res => {
                             this.$Message.success('Success!');
                             localStorage.setItem(process.env.TOKEN_NAME, res.data.body);
+                            localStorage.setItem("userName", res.data.headers.username[0]);
+                            localStorage.setItem("currentPage", '1');
                             this.$router.push("/");
                         });
                     } else {

@@ -14,21 +14,26 @@
           </div>
         </Card>
       </Col>
-      <!--      <Col span="8">-->
-      <!--        <Card style="width:350px">-->
-      <!--          <div>-->
-      <!--            <img-->
-      <!--              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571983198772&di=1c0b617dad8eeaee72e558a05d901c41&imgtype=0&src=http%3A%2F%2Fimg.aso.aizhan.com%2Ficon%2Fcf%2F51%2F11%2Fcf51110bbd7d6444429379babac100e4.jpg"-->
-      <!--              alt="">-->
-      <!--          </div>-->
-      <!--          <div style="text-align: center">-->
-      <!--            <h3>yuntu</h3>-->
-      <!--          </div>-->
-      <!--          <div style="text-align: right">-->
-      <!--            Created On : 123-123123-123-->
-      <!--          </div>-->
-      <!--        </Card>-->
-      <!--      </Col>-->
+      <Col span="12">
+        <Card style="width:350px">
+          <Upload
+            ref="uploadFile"
+            multiple
+            type="drag"
+            :before-upload="checkParas"
+            :on-success="uploadSuccess"
+            :data="this.dataUpload"
+            :action="this.url">
+            <div style="padding: 20px 0">
+              <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+              <p>Click or drag files here to upload</p>
+            </div>
+          </Upload>
+          <Input v-model="dataUpload.name" placeholder="相册名称" clearable
+                 style="width: 200px;margin-bottom: 20px;margin-top: 20px"/>
+          <Input v-model="dataUpload.desc" placeholder="相册描述" clearable style="width: 200px"/>
+        </Card>
+      </Col>
     </Row>
   </div>
 
@@ -42,46 +47,52 @@
         name: 'Album',
         data() {
             return {
-                albumList: []
+                url: '',
+                albumList: [],
+                dataUpload: {
+                    name: '',
+                    desc: '',
+                }
             }
         },
         mounted() {
-            photoService.listAlbums(res => {
-
-                console.log(res);
-                let list = res.data.map(({album, cover}) => {
-                    console.log(album)
-                    let item = {};
-                    item.cover = {};
-                    item.name = album.name;
-                    item.desc = album.desc;
-                    item.id = album._id;
-                    item.timeStamp = album.createTime;
-                    item.time = this.$tool.toDisplayDateString(album.createTime).split(" ")[0];
-                    item.cover.id = cover.id;
-                    item.cover.name = cover.filename;
-                    return item;
-                });
-                console.log(list);
-                this.albumList = list;
-
-                // let list = res.data.map(i => {
-                //
-                //     let item = {};
-                //     item.name = i.name;
-                //     item.desc = i.desc;
-                //     item.id = i.id;
-                //     item.timeStamp = i.timeStamp;
-                //     item.time = i.time;
-                //     console.log(i.id);
-                //     photoService.getCover(i.id, res => console.log(res));
-                //     return item;
-                // });
-                // console.log(list)
-            })
-
+            this.url = process.env.API_PREFIX + '/photo/album';
+            this.loadList();
         },
-        methods: {}
+        methods: {
+            uploadSuccess() {
+                this.loadList();
+                //要调用组件的方法，需要在组件处添加引用 ref="uploadFile"
+                this.$refs.uploadFile.clearFiles();
+                this.dataUpload.name = '';
+                this.dataUpload.desc = '';
+            },
+            loadList() {
+                photoService.listAlbums(res => {
+                    let list = res.data.map(({album, cover}) => {
+                        let item = {};
+                        item.cover = {};
+                        item.name = album.name;
+                        item.desc = album.desc;
+                        item.id = album._id;
+                        item.timeStamp = album.createTime;
+                        item.time = this.$tool.toDisplayDateString(album.createTime).split(" ")[0];
+                        item.cover.id = cover.id;
+                        item.cover.name = cover.filename;
+                        return item;
+                    });
+                    this.albumList = list;
+                })
+            },
+
+            checkParas(file) {
+                if (this.$tool.isNullOrUndefinedOrEmpty(this.dataUpload.name) || this.$tool.isNullOrUndefinedOrEmpty(this.dataUpload.desc)) {
+                    this.$Message.error("请输入相册名称和描述");
+                    return false;
+                }
+                return true;
+            }
+        }
     }
 </script>
 

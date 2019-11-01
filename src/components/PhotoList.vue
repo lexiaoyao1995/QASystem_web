@@ -10,6 +10,21 @@
           </div>
         </Card>
       </Col>
+      <Col span="8">
+        <Card bordered>
+          <Upload
+            ref="uploadPhoto"
+            multiple
+            type="drag"
+            :on-success="uploadSuccess"
+            :action="this.url">
+            <div style="padding: 20px 0">
+              <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+              <p>Click or drag files here to upload</p>
+            </div>
+          </Upload>
+        </Card>
+      </Col>
     </Row>
   </div>
 </template>
@@ -19,20 +34,27 @@
         name: 'photoList',
         data() {
             return {
-                'albumId': '',
-                photoList: []
+                albumId: '',
+                photoList: [],
+                url: ''
             }
         },
         mounted() {
             this.albumId = this.$route.params.id;
-
-            this.photoService.getPhotoByAlbum(this.albumId, i => {
-                this.photoList = i.data.filter(i => i.isCover === false);
-            });
-
-
+            this.url = `${process.env.API_PREFIX}/photo/${this.albumId}`;
+            this.loadList();
         },
-        methods: {}
+        methods: {
+            uploadSuccess() {
+                this.$refs.uploadPhoto.clearFiles();
+                this.loadList();
+            },
+            loadList() {
+                this.photoService.getPhotoByAlbum(this.albumId, i => {
+                    this.photoList = i.data.filter(i => i.isCover === false);
+                });
+            }
+        }
 
     }
 </script>

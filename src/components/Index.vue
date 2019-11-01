@@ -22,7 +22,6 @@
     export default {
         name: 'Index',
         mounted() {
-            this.$axios.get(process.env.API_PREFIX + '/user').then(res => console.log(res));
         }
     }
 </script>
